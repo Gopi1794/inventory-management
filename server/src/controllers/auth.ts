@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
-export const login = async (req: Request, res: Response): Promise<Response> => {
+export const postLogin = async (req: Request, res: Response): Promise<Response> => {
         const { username, contrasena } = req.body;
 
   try {
@@ -35,3 +35,4 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
     return res.status(500).json({ message: "Error en el servidor" });
   }
 };
+
