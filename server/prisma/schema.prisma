@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model roles {
+  id             Int    @id @default(autoincrement())
+  nombre_usuario String @unique
+  contrasena     String
+  rol            String
+}
+
+model Usuarios {
+  usuarioId String @id
+  nombre    String
+  email     String
+}
+
+model Productos {
+  productoId        String    @id
+  nombre            String
+  precio            Float
+  categoria         Float?
+  cantidadExistente Int
+  ventas            Ventas[]
+  compras           Compras[]
+}
+
+model Ventas {
+  ventasId      String    @id
+  productoId    String
+  fechaYhora    DateTime
+  cantidad      Int
+  precioUnidad  Float
+  cantidadTotal Float
+  producto      Productos @relation(fields: [productoId], references: [productoId])
+}
+
+model Compras {
+  comprasId    String    @id
+  productoId   String
+  fechaYhora   DateTime
+  cantidad     Int
+  precioUnidad Float
+  precioTotal  Float
+  producto     Productos @relation(fields: [productoId], references: [productoId])
+}
+
+model Gastos {
+  gastosId   String   @id
+  categoria  String
+  total      Float
+  fechaYhora DateTime
+}
+
+model ResumenDeVentas {
+  resumenDeVentasId  String   @id
+  valorTotal         Float
+  porcentajeDeCambio Float
+  fecha              DateTime
+}
+
+model ResumenDeCompras {
+  resumenDeComprasId String   @id
+  totalComprado      Float
+  porcentajeDeCambio Float
+  fecha              DateTime
+}
+
+model ResumenDeGastos {
+  resumenDeGastosId  String               @id
+  totalGastos        Float
+  fecha              DateTime
+  gastosPorCategoria GastosPorCategoria[]
+}
+
+model GastosPorCategoria {
+  gastosPorCategoriaId String          @id
+  resumenDeGastosId    String
+  fecha                DateTime
+  categoria            String
+  total                Float
+  resumenDeGastos      ResumenDeGastos @relation(fields: [resumenDeGastosId], references: [resumenDeGastosId])
+}
