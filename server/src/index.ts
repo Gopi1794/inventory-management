@@ -10,8 +10,7 @@ import dashboardRoutes from "./routes/dashboardRoutes";
 import productosRoutes from "./routes/productosRoutes";
 import usuariosRouters from "./routes/usuariosRoutes";
 import gastosRoutes from "./routes/gastosRoutes";
-
-import rolesRouter from "./routes/roles";
+import authRoutes from "./routes/authRoutes";
 
 
 
@@ -56,7 +55,8 @@ app.use("/api/usuarios", usuariosRouters);
 // Ruta base para gastos (ej: GET http://localhost:3002/api/gastos)
 app.use("/api/gastos", gastosRoutes);
 
-app.use("/", rolesRouter);
+app.use("/api/authRoutes", authRoutes);
+
 
 
 // =======================

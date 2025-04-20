@@ -89,6 +89,6 @@ model GastosPorCategoria {
   resumenDeGastosId    String
   fecha                DateTime
   categoria            String
-  total                Float
+  total                BigInt
   resumenDeGastos      ResumenDeGastos @relation(fields: [resumenDeGastosId], references: [resumenDeGastosId])
 }

@@ -14,7 +14,7 @@ const dashboardRoutes_1 = __importDefault(require("./routes/dashboardRoutes"));
 const productosRoutes_1 = __importDefault(require("./routes/productosRoutes"));
 const usuariosRoutes_1 = __importDefault(require("./routes/usuariosRoutes"));
 const gastosRoutes_1 = __importDefault(require("./routes/gastosRoutes"));
-const roles_1 = __importDefault(require("./routes/roles"));
+const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 // =======================
 // CONFIGURACIÓN DEL SERVIDOR
 // =======================
@@ -43,7 +43,7 @@ app.use("/api/productos", productosRoutes_1.default);
 app.use("/api/usuarios", usuariosRoutes_1.default);
 // Ruta base para gastos (ej: GET http://localhost:3002/api/gastos)
 app.use("/api/gastos", gastosRoutes_1.default);
-app.use("/", roles_1.default);
+app.use("/api/authRoutes", authRoutes_1.default);
 // =======================
 // INICIAR EL SERVIDOR
 // =======================

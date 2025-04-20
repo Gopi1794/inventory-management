@@ -14,7 +14,7 @@ export const getGastosPorCategoria = async (req: Request, res: Response): Promis
     }
 );
         const getGastosPorCategoriaResumen = getGastosPorCategoriaResumenRaw.map(
-            (item) => ({
+            (item ) => ({
                 ...item,
                 total: item.total.toString()
             

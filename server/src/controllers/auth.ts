@@ -1,15 +1,14 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
 export const postLogin = async (req: Request, res: Response): Promise<Response> => {
-        const { username, contrasena } = req.body;
+  const { username, contrasena } = req.body;
 
   try {
-    const user = await prisma.roles.findUnique({
+    const user = await prisma.roles.findFirst({
       where: { nombre_usuario: username },
     });
 
@@ -17,9 +16,8 @@ export const postLogin = async (req: Request, res: Response): Promise<Response> 
       return res.status(401).json({ message: "Usuario no encontrado" });
     }
 
-    const validcontrasena = await bcrypt.compare(contrasena, user.contrasena);
-
-    if (!validcontrasena) {
+    // Comparación directa sin bcrypt
+    if (contrasena !== user.contrasena) {
       return res.status(401).json({ message: "Contraseña incorrecta" });
     }
 
@@ -35,4 +33,3 @@ export const postLogin = async (req: Request, res: Response): Promise<Response> 
     return res.status(500).json({ message: "Error en el servidor" });
   }
 };
-
