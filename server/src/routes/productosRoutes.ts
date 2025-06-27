@@ -1,9 +1,15 @@
-import { Router } from "express";
-import { createProducto, getProductos } from "../controllers/productosControllers";
+import express from "express";
+import { createProducto, getProductos, updateProductoQR } from "../controllers/productosControllers";
 
-const router = Router();
+const router = express.Router();
 
 router.get("/", getProductos);
-router.post("/", createProducto);
+router.post("/", (req, res, next) => {
+  console.log("Llega a la ruta POST /api/productos");
+  next();
+}, createProducto);
+
+// Nueva ruta PATCH para actualizar el QR
+router.patch("/:productoId", updateProductoQR);
 
 export default router;

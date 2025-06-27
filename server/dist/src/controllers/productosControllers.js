@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createProducto = exports.getProductos = void 0;
+exports.updateProductoQR = exports.createProducto = exports.getProductos = void 0;
 const client_1 = require("@prisma/client");
 // Inicializamos el cliente de Prisma para interactuar con la base de datos.
 const prisma = new client_1.PrismaClient();
@@ -18,14 +18,39 @@ const getProductos = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     var _a;
     try {
         // Extraemos el parámetro de búsqueda desde la query string de la URL.
-        const search = (_a = req.query.search) === null || _a === void 0 ? void 0 : _a.toString();
+        const search = ((_a = req.query.search) === null || _a === void 0 ? void 0 : _a.toString()) || "";
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 12;
+        const skip = (page - 1) * limit;
         // Realizamos una consulta a la base de datos para buscar productos
         // cuyo nombre contenga el término de búsqueda.
+        const filters = [];
+        if (search) {
+            filters.push({ nombre: { contains: search, mode: "insensitive" } });
+        }
+        if (req.query.categoria) {
+            filters.push({ categoria: Number(req.query.categoria) });
+        }
+        if (req.query.proveedor) {
+            filters.push({ proveedor: { contains: req.query.proveedor, mode: "insensitive" } });
+        }
+        if (req.query.precioMin) {
+            filters.push({ precio: { gte: Number(req.query.precioMin) } });
+        }
+        if (req.query.precioMax) {
+            filters.push({ precio: { lte: Number(req.query.precioMax) } });
+        }
+        const where = filters.length > 0 ? { AND: filters } : {};
         const productos = yield prisma.productos.findMany({
-            where: {
-                nombre: {
-                    contains: search,
-                    mode: "insensitive", // Filtramos por nombre que contenga el término de búsqueda.
+            where,
+            skip,
+            take: limit,
+            orderBy: { nombre: "asc" },
+            include: {
+                ubicaciones: {
+                    include: {
+                        floor: true, // Esto trae el nombre y el nivel del piso
+                    },
                 },
             },
         });
@@ -40,33 +65,57 @@ const getProductos = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.getProductos = getProductos;
 // Función para crear un nuevo producto en la base de datos.
 const createProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // Aquí pones el console.log
+    console.log("Body recibido en createProducto:", req.body);
     try {
-        // Mostramos en consola los datos que estamos recibiendo en el cuerpo de la solicitud (req.body).
-        console.log("Datos recibidos:", req.body);
-        // Extraemos los datos del cuerpo de la solicitud.
-        const { productoId, nombre, precio, categoria, cantidadExistente, proveedor, descripcion } = req.body;
-        // Creamos un nuevo producto en la base de datos usando Prisma.
-        const productos = yield prisma.productos.create({
+        const { productoId, nombre, precio, categoria, cantidadExistente, proveedor, descripcion, qr_url, ubicaciones } = req.body;
+        const now = new Date();
+        // 1. Crear el producto
+        const producto = yield prisma.productos.create({
             data: {
-                productoId, // Usamos el ID del producto proporcionado.
-                nombre, // Usamos el nombre del producto proporcionado.
-                precio: parseFloat(precio), // Aseguramos que el precio sea un número flotante.
-                categoria: categoria, // Convertimos la categoría a número flotante si es opcional.
-                cantidadExistente,
-                proveedor, // Usamos el proveedor del producto proporcionado.
-                descripcion, // Usamos la descripción del producto proporcionada.
+                productoId,
+                nombre,
+                precio: parseFloat(precio),
+                categoria,
+                cantidadExistente: Number(cantidadExistente),
+                proveedor,
+                descripcion,
+                qr_url: qr_url || null,
+                fechaDeCreacion: now,
+                fechaDeModificacion: now,
             },
         });
-        // Respondemos con el producto creado en formato JSON y un código de éxito 201 (Creado).
-        res.status(201).json(productos);
+        // 2. Crear las ubicaciones asociadas
+        if (ubicaciones && Array.isArray(ubicaciones)) {
+            yield Promise.all(ubicaciones.map((ubic) => prisma.productoUbicacion.create({
+                data: {
+                    productoId: producto.productoId,
+                    floorId: ubic.floorId,
+                    // cantidad: 1 // puedes dejarlo así o permitir editarlo
+                },
+            })));
+        }
+        res.status(201).json(producto);
     }
     catch (error) {
-        // En caso de error, mostramos el error en consola para depuración.
         console.error("Error en createProducto:", error);
-        // Convertimos el error a un objeto Error para acceder a la propiedad .message
         const errorMessage = error instanceof Error ? error.message : "Error desconocido";
-        // Respondemos con un mensaje de error y un código 500 (Error interno del servidor).
         res.status(500).json({ message: "Error creating product", error: errorMessage });
     }
 });
 exports.createProducto = createProducto;
+const updateProductoQR = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { productoId } = req.params;
+    const { qr_url } = req.body;
+    try {
+        const producto = yield prisma.productos.update({
+            where: { productoId },
+            data: { qr_url },
+        });
+        res.json(producto);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Error actualizando QR", error });
+    }
+});
+exports.updateProductoQR = updateProductoQR;

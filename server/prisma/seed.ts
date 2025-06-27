@@ -1,110 +1,105 @@
 import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import path from "path";
-import { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-async function deleteAllData(orderedFileNames: string[]) {
-  const modelNames = orderedFileNames.map((fileName) => {
-    const modelName = path.basename(fileName, path.extname(fileName));
-    return modelName.charAt(0).toUpperCase() + modelName.slice(1);
-  });
+const dataDir = path.join(__dirname, "seedData");
 
-  for (const modelName of modelNames) {
-    const model: any = prisma[modelName as keyof typeof prisma];
-    if (model) {
-      await model.deleteMany({});
-      console.log(`Cleared data from ${modelName}`);
-    } else {
-      console.error(
-        `Model ${modelName} not found. Please ensure the model name is correctly specified.`
-      );
-    }
-  }
+function readJson(file: string) {
+  return JSON.parse(fs.readFileSync(path.join(dataDir, file), "utf-8"));
 }
 
 async function main() {
-  const dataDirectory = path.join(__dirname, "seedData");
-
-  const orderedFileNames = [
-    "productos.json",
-    "resumenDeGastos.json",
-    "ventas.json",
-    "resumenDeVentas.json",
-    "compras.json",
-    "resumenDeCompras.json",
-    "usuarios.json",
-    "gastos.json",
-    "gastosPorCategoria.json",
+  // 1. Limpiar tablas en orden inverso a las relaciones
+  const deletionOrder = [
+    "GastosPorCategoria",
+    "ResumenDeGastos",
+    "ResumenDeCompras",
+    "ResumenDeVentas",
+    "Gastos",
+    "Ventas",
+    "Compras",
+    "ProductoUbicacion",
+    "Productos",
+    "Bin",
+    "Rack",
+    "Floor",
+    "Usuarios",
+    "Roles"
   ];
-
-  await deleteAllData(orderedFileNames);
-
-  for (const fileName of orderedFileNames) {
-    const filePath = path.join(dataDirectory, fileName);
-    const jsonData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    const modelName = path.basename(fileName, path.extname(fileName));
-    const model: any = prisma[modelName as keyof typeof prisma];
-
-    if (!model) {
-      console.error(`No Prisma model matches the file name: ${fileName}`);
-      continue;
+  for (const model of deletionOrder) {
+    const prismaModel = (prisma as any)[model.charAt(0).toLowerCase() + model.slice(1)];
+    if (prismaModel && prismaModel.deleteMany) {
+      await prismaModel.deleteMany();
+      console.log(`✅ Cleared ${model}`);
     }
+  }
 
-    for (const data of jsonData) {
-      try {
-        await model.create({
-          data,
-        });
-        console.log(`Inserted data into ${modelName}:`, data);
-      } catch (error) {
-        console.error(`Error inserting data into ${modelName}:`, data, error);
+  // 2. Insertar modelos base
+  // (Agrega aquí Floor, Rack, Bin si tienes sus JSON)
+  // Ejemplo:
+  // const floors = readJson("floors.json");
+  // if (floors.length) await prisma.floor.createMany({ data: floors });
+
+  // 3. Insertar productos (sin rackId)
+  const productos = readJson("productos.json").map((p: any) => {
+    // Elimina rackId si existe
+    const { rackId, ...rest } = p;
+    return rest;
+  });
+  if (productos.length) {
+    await prisma.productos.createMany({ data: productos });
+    console.log(`✅ Seeded Productos`);
+  }
+
+  // 4. Insertar ubicaciones de productos (ProductoUbicacion)
+  // Crea un archivo productoUbicacion.json con [{ productoId, rackId, cantidad }]
+  if (fs.existsSync(path.join(dataDir, "productoUbicacion.json"))) {
+    const ubicaciones = readJson("productoUbicacion.json");
+    if (ubicaciones.length) {
+      await prisma.productoUbicacion.createMany({ data: ubicaciones });
+      console.log(`✅ Seeded ProductoUbicacion`);
+    }
+  }
+
+  // 5. Insertar el resto de modelos (Usuarios, Compras, Ventas, etc.)
+  const otros = [
+    { model: "Usuarios", file: "usuarios.json" },
+    { model: "Compras", file: "compras.json" },
+    { model: "Ventas", file: "ventas.json" },
+    { model: "Gastos", file: "gastos.json" },
+    { model: "ResumenDeVentas", file: "resumenDeVentas.json" },
+    { model: "ResumenDeCompras", file: "resumenDeCompras.json" },
+    { model: "ResumenDeGastos", file: "resumenDeGastos.json" },
+    { model: "GastosPorCategoria", file: "gastosPorCategoria.json" }
+  ];
+  for (const { model, file } of otros) {
+    const filePath = path.join(dataDir, file);
+    if (fs.existsSync(filePath)) {
+      const data = readJson(file);
+      if (data.length) {
+        const prismaModel = (prisma as any)[model.charAt(0).toLowerCase() + model.slice(1)];
+        if (prismaModel && prismaModel.createMany) {
+          try {
+            await prismaModel.createMany({ data });
+            console.log(`✅ Seeded ${model}`);
+          } catch (err) {
+            console.error(`❌ Error seeding ${model}:`, err);
+          }
+        }
       }
     }
-
-    console.log(`Seeded ${modelName} with data from ${fileName}`);
   }
+
+  console.log("🎉 Database seeding completed successfully!");
 }
 
 main()
   .catch((e) => {
-    console.error(e);
+    console.error("💥 Error during seeding:", e);
+    process.exit(1);
   })
   .finally(async () => {
     await prisma.$disconnect();
   });
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "POST") {
-    const { x, y, locked, qrData, productos } = req.body;
-
-    try {
-      const rack = await prisma.rack.create({
-        data: {
-          x,
-          y,
-          locked,
-          qrData,
-          productos: {
-            create: productos.map((producto: any) => ({
-              productoId: producto.productoId,
-              nombre: producto.nombre,
-              precio: producto.precio,
-              cantidadExistente: producto.cantidadExistente,
-              categoria: producto.categoria,
-            })),
-          },
-        },
-      });
-
-      res.status(201).json(rack);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Error al crear el rack" });
-    }
-  } else {
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
-}
