@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = handler;
 const client_1 = require("@prisma/client");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
@@ -59,9 +60,15 @@ function main() {
                 continue;
             }
             for (const data of jsonData) {
-                yield model.create({
-                    data,
-                });
+                try {
+                    yield model.create({
+                        data,
+                    });
+                    console.log(`Inserted data into ${modelName}:`, data);
+                }
+                catch (error) {
+                    console.error(`Error inserting data into ${modelName}:`, data, error);
+                }
             }
             console.log(`Seeded ${modelName} with data from ${fileName}`);
         }
@@ -74,3 +81,38 @@ main()
     .finally(() => __awaiter(void 0, void 0, void 0, function* () {
     yield prisma.$disconnect();
 }));
+function handler(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (req.method === "POST") {
+            const { x, y, locked, qrData, productos } = req.body;
+            try {
+                const rack = yield prisma.rack.create({
+                    data: {
+                        x,
+                        y,
+                        locked,
+                        qrData,
+                        productos: {
+                            create: productos.map((producto) => ({
+                                productoId: producto.productoId,
+                                nombre: producto.nombre,
+                                precio: producto.precio,
+                                cantidadExistente: producto.cantidadExistente,
+                                categoria: producto.categoria,
+                            })),
+                        },
+                    },
+                });
+                res.status(201).json(rack);
+            }
+            catch (error) {
+                console.error(error);
+                res.status(500).json({ error: "Error al crear el rack" });
+            }
+        }
+        else {
+            res.setHeader("Allow", ["POST"]);
+            res.status(405).end(`Method ${req.method} Not Allowed`);
+        }
+    });
+}

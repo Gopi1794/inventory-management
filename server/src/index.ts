@@ -11,6 +11,7 @@ import productosRoutes from "./routes/productosRoutes";
 import usuariosRouters from "./routes/usuariosRoutes";
 import gastosRoutes from "./routes/gastosRoutes";
 import authRoutes from "./routes/authRoutes";
+import rackRoutes from "./routes/rackRoutes";
 
 
 
@@ -56,6 +57,9 @@ app.use("/api/usuarios", usuariosRouters);
 app.use("/api/gastos", gastosRoutes);
 
 app.use("/api/authRoutes", authRoutes);
+
+app.use("/api/rackRoutes", rackRoutes); 
+// Ruta base para racks (ej: GET http://localhost:3002/api/rackRoutes)
 
 
 

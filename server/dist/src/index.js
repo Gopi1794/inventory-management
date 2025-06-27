@@ -15,6 +15,7 @@ const productosRoutes_1 = __importDefault(require("./routes/productosRoutes"));
 const usuariosRoutes_1 = __importDefault(require("./routes/usuariosRoutes"));
 const gastosRoutes_1 = __importDefault(require("./routes/gastosRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
+const rackRoutes_1 = __importDefault(require("./routes/rackRoutes"));
 // =======================
 // CONFIGURACIÓN DEL SERVIDOR
 // =======================
@@ -44,6 +45,8 @@ app.use("/api/usuarios", usuariosRoutes_1.default);
 // Ruta base para gastos (ej: GET http://localhost:3002/api/gastos)
 app.use("/api/gastos", gastosRoutes_1.default);
 app.use("/api/authRoutes", authRoutes_1.default);
+app.use("/api/rackRoutes", rackRoutes_1.default);
+// Ruta base para racks (ej: GET http://localhost:3002/api/rackRoutes)
 // =======================
 // INICIAR EL SERVIDOR
 // =======================

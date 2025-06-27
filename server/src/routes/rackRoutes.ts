@@ -1,8 +1,8 @@
 import express from "express";
-import { postLogin } from "../controllers/auth";
+import { createRack } from "../controllers/racks";
 
 const router = express.Router();
 
-router.post("/login", postLogin);
+router.post("/login", createRack);
 
 export default router;

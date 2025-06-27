@@ -17,18 +17,20 @@ const client_1 = require("@prisma/client");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const prisma = new client_1.PrismaClient();
 const postLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { username, contrasena } = req.body;
+    const { nombre_usuario, contrasena } = req.body;
     try {
+        // Verifica si el usuario existe
         const user = yield prisma.roles.findFirst({
-            where: { nombre_usuario: username },
+            where: { nombre_usuario },
         });
         if (!user) {
             return res.status(401).json({ message: "Usuario no encontrado" });
         }
-        // Comparación directa sin bcrypt
+        // Verifica si la contraseña es correcta
         if (contrasena !== user.contrasena) {
             return res.status(401).json({ message: "Contraseña incorrecta" });
         }
+        // Genera un token JWT
         const token = jsonwebtoken_1.default.sign({ id: user.id, rol: user.rol }, process.env.JWT_SECRET || "clave-ultra-secreta", { expiresIn: "1h" });
         return res.json({ token, rol: user.rol });
     }

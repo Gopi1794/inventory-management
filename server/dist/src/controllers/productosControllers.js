@@ -44,19 +44,21 @@ const createProducto = (req, res) => __awaiter(void 0, void 0, void 0, function*
         // Mostramos en consola los datos que estamos recibiendo en el cuerpo de la solicitud (req.body).
         console.log("Datos recibidos:", req.body);
         // Extraemos los datos del cuerpo de la solicitud.
-        const { productoId, nombre, precio, categoria, cantidadExistente } = req.body;
+        const { productoId, nombre, precio, categoria, cantidadExistente, proveedor, descripcion } = req.body;
         // Creamos un nuevo producto en la base de datos usando Prisma.
-        const producto = yield prisma.productos.create({
+        const productos = yield prisma.productos.create({
             data: {
                 productoId, // Usamos el ID del producto proporcionado.
                 nombre, // Usamos el nombre del producto proporcionado.
                 precio: parseFloat(precio), // Aseguramos que el precio sea un número flotante.
-                categoria: categoria ? parseFloat(categoria) : null, // Convertimos la categoría a número flotante si es opcional.
-                cantidadExistente, // Usamos la cantidad existente proporcionada.
+                categoria: categoria, // Convertimos la categoría a número flotante si es opcional.
+                cantidadExistente,
+                proveedor, // Usamos el proveedor del producto proporcionado.
+                descripcion, // Usamos la descripción del producto proporcionada.
             },
         });
         // Respondemos con el producto creado en formato JSON y un código de éxito 201 (Creado).
-        res.status(201).json(producto);
+        res.status(201).json(productos);
     }
     catch (error) {
         // En caso de error, mostramos el error en consola para depuración.

@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model roles {
+model Roles {
   id             Int    @id @default(autoincrement())
   nombre_usuario String @unique
   contrasena     String
@@ -32,6 +32,8 @@ model Productos {
   precio            Float
   categoria         Float?
   cantidadExistente Int
+  descripcion       String?   @default("Descripción no disponible")
+  proveedor         String?   @default("Proveedor no especificado")
   ventas            Ventas[]
   compras           Compras[]
 }
@@ -91,4 +93,26 @@ model GastosPorCategoria {
   categoria            String
   total                BigInt
   resumenDeGastos      ResumenDeGastos @relation(fields: [resumenDeGastosId], references: [resumenDeGastosId])
+}
+
+model Rack {
+  id        Int        @id @default(autoincrement())
+  x         Float
+  y         Float
+  locked    Boolean
+  qrData    String
+  productos Producto[] // nombre del modelo en singular y bien referenciado
+}
+
+model Producto {
+  id                Int     @id @default(autoincrement())
+  productoId        String  @unique
+  nombre            String
+  precio            Float
+  cantidadExistente Int
+  categoria         Int?
+  descripcion       String? @default("Descripción no disponible")
+  proveedor         String? @default("Proveedor no especificado")
+  rackId            Int?
+  rack              Rack?   @relation(fields: [rackId], references: [id])
 }

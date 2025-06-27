@@ -4,244 +4,454 @@
     "nombre": "Pinkscale Blazing Star",
     "precio": 456.04,
     "categoria": 2.25,
-    "cantidadExistente": 124834
+    "cantidadExistente": 124834,
+    "descripcion": "Planta ornamental con flores rosadas vibrantes, ideal para jardines secos.",
+    "proveedor": "Nature's Beauty Flowers",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-03-15T08:22:10.000Z",
+    "fechaDeModificacion": "2023-07-22T14:35:45.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "8ac1ac77-7358-425e-be16-0bdde9f02e59",
     "nombre": "Gila Milkvetch",
     "precio": 899.05,
     "categoria": 3.56,
-    "cantidadExistente": 799402
+    "cantidadExistente": 799402,
+    "descripcion": "Planta resistente para climas áridos, con flores púrpuras en primavera.",
+    "proveedor": "Desert Flora Distributors",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-02-08T11:05:33.000Z",
+    "fechaDeModificacion": "2023-09-12T09:18:27.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "1afc136b-4d9f-4e8e-aace-8e1df908a404",
     "nombre": "Rocky Mountain Zinnia",
     "precio": 264.37,
     "categoria": 3.23,
-    "cantidadExistente": 842192
+    "cantidadExistente": 842192,
+    "descripcion": "Flores coloridas que atraen mariposas, perfectas para bordes de jardín.",
+    "proveedor": "Nature's Beauty Flowers",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-01-22T16:42:19.000Z",
+    "fechaDeModificacion": "2023-05-30T10:15:08.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "af84cc12-4fea-4f58-aece-f2ce92ca9580",
     "nombre": "Guadalupe Suncup",
     "precio": 555.93,
     "categoria": 4.09,
-    "cantidadExistente": 236333
+    "cantidadExistente": 236333,
+    "descripcion": "Flores amarillas brillantes que siguen la trayectoria del sol.",
+    "proveedor": "Sunny Valley Gardens",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-04-05T09:12:55.000Z",
+    "fechaDeModificacion": "2023-08-18T13:40:22.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "86e3bb1c-2f5d-4774-98f3-4df7cddd0a0f",
     "nombre": "Saline Phlox",
     "precio": 82.62,
     "categoria": 4.8,
-    "cantidadExistente": 601208
+    "cantidadExistente": 601208,
+    "descripcion": "Variedad resistente a suelos salinos, con fragantes flores blancas.",
+    "proveedor": "Coastal Plant Specialists",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-03-28T14:30:41.000Z",
+    "fechaDeModificacion": "2023-10-05T11:25:36.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "26b017c6-06d8-443f-9b4a-d6b1cee6f4c0",
     "nombre": "Common Brighteyes",
     "precio": 435.44,
     "categoria": 0.27,
-    "cantidadExistente": 124068
+    "cantidadExistente": 124068,
+    "descripcion": "Flores con centro amarillo brillante y pétalos blancos.",
+    "proveedor": "General Flora Inc.",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-02-14T10:18:07.000Z",
+    "fechaDeModificacion": "2023-06-20T15:42:53.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "440c9e80-6bf8-4eb3-b2d2-f81936d67de3",
     "nombre": "Vermejo Phlox",
     "precio": 759.15,
     "categoria": 2.46,
-    "cantidadExistente": 234525
+    "cantidadExistente": 234525,
+    "descripcion": "Variedad rara de phlox con flores en tonos violeta intenso.",
+    "proveedor": "Rare Plants Network",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-05-10T13:25:30.000Z",
+    "fechaDeModificacion": "2023-11-15T08:10:44.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "98255f4e-40a6-470f-89a5-0792729f8947",
     "nombre": "Purple Marshlocks",
     "precio": 974.99,
     "categoria": 4.82,
-    "cantidadExistente": 739009
+    "cantidadExistente": 739009,
+    "descripcion": "Planta de humedales con flores púrpuras y follaje denso.",
+    "proveedor": "Nature's Beauty Flowers",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-01-30T08:45:12.000Z",
+    "fechaDeModificacion": "2023-04-22T16:30:18.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "2a339fb2-f9f3-43bc-a85a-b217a0a38f12",
     "nombre": "Hamatocaulis Moss",
     "precio": 639.9,
     "categoria": 1.17,
-    "cantidadExistente": 754285
+    "cantidadExistente": 754285,
+    "descripcion": "Musgo ideal para terrarios y jardines de sombra húmeda.",
+    "proveedor": "General Flora Inc.",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-06-18T11:20:35.000Z",
+    "fechaDeModificacion": "2023-09-28T10:05:27.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "8a8391b2-b4ac-4847-b652-66ffd8d65875",
     "nombre": "Wax Myrtle",
     "precio": 62.95,
     "categoria": 4.6,
-    "cantidadExistente": 205240
+    "cantidadExistente": 205240,
+    "descripcion": "Arbusto perenne con bayas aromáticas, excelente para setos.",
+    "proveedor": "Sunny Valley Gardens",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-04-22T15:10:48.000Z",
+    "fechaDeModificacion": "2023-07-30T09:45:12.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "be2157fb-7454-405e-9511-bf7ba81b7726",
     "nombre": "Thladiantha",
     "precio": 699.0,
     "categoria": 1.65,
-    "cantidadExistente": 399124
+    "cantidadExistente": 399124,
+    "descripcion": "Planta trepadora con frutos decorativos, ideal para pérgolas.",
+    "proveedor": "Nature's Beauty Flowers",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-03-10T09:35:22.000Z",
+    "fechaDeModificacion": "2023-08-05T14:20:33.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "fdf1ba3d-fa06-4ce5-90ff-d081c5d37176",
     "nombre": "Common Tarweed",
     "precio": 899.61,
     "categoria": 2.39,
-    "cantidadExistente": 196884
+    "cantidadExistente": 196884,
+    "descripcion": "Planta silvestre con flores amarillas y aroma resinoso.",
+    "proveedor": "General Flora Inc.",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-05-25T12:15:40.000Z",
+    "fechaDeModificacion": "2023-10-20T11:30:15.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "afded6df-058f-477d-9878-e0e0b1d3dff3",
     "nombre": "Smooth Phlox",
     "precio": 575.6,
     "categoria": 4.38,
-    "cantidadExistente": 673658
+    "cantidadExistente": 673658,
+    "descripcion": "Variedad de phlox con flores suaves y colores pastel.",
+    "proveedor": "Nature's Beauty Flowers",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-02-20T10:40:18.000Z",
+    "fechaDeModificacion": "2023-06-15T13:25:42.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "daa29167-82a7-474b-9687-b8b903e7ec69",
     "nombre": "Lemmon's Beggarticks",
     "precio": 492.35,
     "categoria": 1.07,
-    "cantidadExistente": 205143
+    "cantidadExistente": 205143,
+    "descripcion": "Planta con flores compuestas y semillas adhesivas.",
+    "proveedor": "Desert Flora Distributors",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-07-12T14:05:29.000Z",
+    "fechaDeModificacion": "2023-11-25T09:15:37.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "ccb83982-71f3-4497-bad8-7e64c6920dc6",
     "nombre": "Globe Fimbry",
     "precio": 304.69,
     "categoria": 2.62,
-    "cantidadExistente": 388596
+    "cantidadExistente": 388596,
+    "descripcion": "Hierba ornamental con inflorescencias esféricas.",
+    "proveedor": "General Flora Inc.",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-01-18T08:30:45.000Z",
+    "fechaDeModificacion": "2023-05-15T16:20:10.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "1936d406-e89e-40e4-bff7-1827532269d4",
     "nombre": "Columbia Milkvetch",
     "precio": 845.15,
     "categoria": 2.21,
-    "cantidadExistente": 631658
+    "cantidadExistente": 631658,
+    "descripcion": "Planta leguminosa con flores púrpuras, fijadora de nitrógeno.",
+    "proveedor": "Nature's Beauty Flowers",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-03-05T11:15:33.000Z",
+    "fechaDeModificacion": "2023-07-18T10:40:25.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "c849a535-5f8b-47e3-889c-015693a644ac",
     "nombre": "Girdlepod",
     "precio": 880.09,
     "categoria": 1.49,
-    "cantidadExistente": 65457
+    "cantidadExistente": 65457,
+    "descripcion": "Arbusto tropical con frutos en forma de anillos.",
+    "proveedor": "Tropical Plant Co.",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-06-22T13:25:50.000Z",
+    "fechaDeModificacion": "2023-10-15T14:30:12.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "0c3e80ee-59b3-4fc4-b760-8b07acc2d3ae",
     "nombre": "Lindley's Clerodendrum",
     "precio": 51.66,
     "categoria": 1.53,
-    "cantidadExistente": 263383
+    "cantidadExistente": 263383,
+    "descripcion": "Arbusto floreciente con racimos de flores blancas.",
+    "proveedor": "Sunny Valley Gardens",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-04-10T09:45:27.000Z",
+    "fechaDeModificacion": "2023-08-22T12:15:38.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "d8f5bee3-f3eb-4071-a124-6b857e0fd798",
     "nombre": "Arizonia Dry Rock Moss",
     "precio": 746.88,
     "categoria": 4.71,
-    "cantidadExistente": 616812
+    "cantidadExistente": 616812,
+    "descripcion": "Musgo resistente para jardines rocosos y secos.",
+    "proveedor": "Desert Flora Distributors",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-05-15T14:20:15.000Z",
+    "fechaDeModificacion": "2023-09-05T11:10:44.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "8d15de86-0e4a-4414-9166-7a33610202d3",
     "nombre": "Clamshell Orchid",
     "precio": 17.1,
     "categoria": 0.79,
-    "cantidadExistente": 604774
+    "cantidadExistente": 604774,
+    "descripcion": "Orquídea terrestre con flores que imitan conchas marinas.",
+    "proveedor": "Rare Plants Network",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-02-25T10:10:33.000Z",
+    "fechaDeModificacion": "2023-06-10T15:25:19.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "ea8fd0b9-c2d9-4d43-9c23-44cb99d079bb",
     "nombre": "Fourleaf Mare's-tail",
     "precio": 905.04,
     "categoria": 3.71,
-    "cantidadExistente": 909107
+    "cantidadExistente": 909107,
+    "descripcion": "Planta acuática con tallos articulados y verticilos foliares.",
+    "proveedor": "Aquatic Greens",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-07-08T12:30:45.000Z",
+    "fechaDeModificacion": "2023-11-20T10:45:22.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "25d01c80-bca1-4a00-b1d0-0fbd39ff9e89",
     "nombre": "Simpson's Rosinweed",
     "precio": 184.41,
     "categoria": 1.98,
-    "cantidadExistente": 953695
+    "cantidadExistente": 953695,
+    "descripcion": "Planta resinosa con grandes flores amarillas.",
+    "proveedor": "General Flora Inc.",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-03-20T08:15:22.000Z",
+    "fechaDeModificacion": "2023-07-05T14:30:11.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "1d6df6e3-b7ea-4507-9d66-87c6ee8ed5b9",
     "nombre": "Lobelia",
     "precio": 163.6,
     "categoria": 0.81,
-    "cantidadExistente": 341530
+    "cantidadExistente": 341530,
+    "descripcion": "Planta con flores azules intensas en largos racimos.",
+    "proveedor": "Nature's Beauty Flowers",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-06-05T11:40:18.000Z",
+    "fechaDeModificacion": "2023-10-10T09:25:33.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "000a8c23-5bca-436c-a216-4e747a94c511",
     "nombre": "Yew Plum Pine",
     "precio": 196.27,
     "categoria": 1.6,
-    "cantidadExistente": 967173
+    "cantidadExistente": 967173,
+    "descripcion": "Conífera ornamental con follaje denso y crecimiento lento.",
+    "proveedor": "Evergreen Specialties",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-04-15T13:20:10.000Z",
+    "fechaDeModificacion": "2023-08-25T16:15:47.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "c5b600dc-6bfb-492a-b335-c3cc8c707959",
     "nombre": "Thimbleberry",
     "precio": 602.37,
     "categoria": 0.13,
-    "cantidadExistente": 162208
+    "cantidadExistente": 162208,
+    "descripcion": "Arbusto con frutos comestibles similares a frambuesas.",
+    "proveedor": "Berry Good Plants",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-05-20T10:05:42.000Z",
+    "fechaDeModificacion": "2023-09-15T12:40:29.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "9d5fafbc-312b-47e8-ada1-283918f0c3b5",
     "nombre": "Yellowturbans",
     "precio": 564.82,
     "categoria": 4.74,
-    "cantidadExistente": 33021
+    "cantidadExistente": 33021,
+    "descripcion": "Flores con forma de turbante en vibrante amarillo.",
+    "proveedor": "Rare Plants Network",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-07-15T14:35:20.000Z",
+    "fechaDeModificacion": "2023-12-05T11:15:38.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "0114d5d4-ae48-46fa-b0ca-afe60eb88add",
     "nombre": "Field Brome",
     "precio": 664.2,
     "categoria": 0.13,
-    "cantidadExistente": 363992
+    "cantidadExistente": 363992,
+    "descripcion": "Hierba perenne útil para control de erosión.",
+    "proveedor": "General Flora Inc.",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-01-10T09:25:15.000Z",
+    "fechaDeModificacion": "2023-04-15T13:40:22.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "e5b0da8c-148d-4680-b262-8609fb8a10da",
     "nombre": "Pentas",
     "precio": 685.1,
     "categoria": 1.5,
-    "cantidadExistente": 635092
+    "cantidadExistente": 635092,
+    "descripcion": "Planta con flores estrelladas que atraen colibríes.",
+    "proveedor": "Nature's Beauty Flowers",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-08-05T11:30:45.000Z",
+    "fechaDeModificacion": "2023-12-15T10:20:33.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "2be5b024-2c96-4f29-912c-c6f36353f799",
     "nombre": "Strigose Beard Lichen",
     "precio": 373.81,
     "categoria": 1.06,
-    "cantidadExistente": 35383
+    "cantidadExistente": 35383,
+    "descripcion": "Liquen barbudo que crece sobre árboles y rocas.",
+    "proveedor": "Forest Lichen Co.",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-03-25T10:15:28.000Z",
+    "fechaDeModificacion": "2023-07-10T14:45:19.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "fcf2e432-62a3-4b6f-a34d-36e42a12272e",
     "nombre": "Mad River Fleabane",
     "precio": 669.97,
     "categoria": 1.34,
-    "cantidadExistente": 880242
+    "cantidadExistente": 880242,
+    "descripcion": "Planta con pequeñas flores parecidas a margaritas.",
+    "proveedor": "General Flora Inc.",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-05-05T13:40:12.000Z",
+    "fechaDeModificacion": "2023-09-20T09:30:44.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "fc4c81e5-f1ac-40f5-8c6f-da3fbad5599d",
     "nombre": "Chickenthief",
     "precio": 100.11,
     "categoria": 0.49,
-    "cantidadExistente": 896782
+    "cantidadExistente": 896782,
+    "descripcion": "Hierba anual con flores diminutas y crecimiento rápido.",
+    "proveedor": "Sunny Valley Gardens",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-06-30T15:25:37.000Z",
+    "fechaDeModificacion": "2023-11-10T12:15:28.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "07238d8e-0037-4972-87ca-0df206ee3e42",
     "nombre": "Palmleaf Poppymallow",
     "precio": 22.99,
     "categoria": 3.42,
-    "cantidadExistente": 635344
+    "cantidadExistente": 635344,
+    "descripcion": "Planta con hojas palmadas y flores de amapola.",
+    "proveedor": "Desert Flora Distributors",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-04-28T09:10:44.000Z",
+    "fechaDeModificacion": "2023-08-15T11:40:15.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "154b7860-23a2-4564-ad99-1745ab7122ef",
     "nombre": "Guayanan Waterclover",
     "precio": 45.45,
     "categoria": 0.34,
-    "cantidadExistente": 456487
+    "cantidadExistente": 456487,
+    "descripcion": "Helecho acuático con hojas en forma de trébol de cuatro hojas.",
+    "proveedor": "Aquatic Greens",
+    "rackId": 3,
+    "fechaDeCreacion": "2023-07-22T12:15:30.000Z",
+    "fechaDeModificacion": "2023-12-20T10:05:41.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "8d4bf814-65d4-4df4-84cc-68911d925fdf",
     "nombre": "Emory's Acacia",
     "precio": 847.6,
     "categoria": 1.79,
-    "cantidadExistente": 638956
+    "cantidadExistente": 638956,
+    "descripcion": "Árbol espinoso con flores amarillas fragantes.",
+    "proveedor": "Desert Flora Distributors",
+    "rackId": 1,
+    "fechaDeCreacion": "2023-02-12T08:40:25.000Z",
+    "fechaDeModificacion": "2023-05-25T15:20:13.000Z",
+    "fechaDeEliminacion": null
   },
   {
     "productoId": "a52bf1bd-3d35-4cd2-849a-354e3952e2d2",
     "nombre": "American Century Plant",
     "precio": 969.47,
     "categoria": 3.66,
-    "cantidadExistente": 248630
+    "cantidadExistente": 248630,
+    "descripcion": "Agave que florece una vez en su vida, después de varios años.",
+    "proveedor": "Desert Flora Distributors",
+    "rackId": 2,
+    "fechaDeCreacion": "2023-08-15T10:20:15.000Z",
+    "fechaDeModificacion": "2023-12-25T09:10:32.000Z",
+    "fechaDeEliminacion": null
   }
 ]

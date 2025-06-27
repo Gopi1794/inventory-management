@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import path from "path";
+import { NextApiRequest, NextApiResponse } from "next";
+
 const prisma = new PrismaClient();
 
 async function deleteAllData(orderedFileNames: string[]) {
@@ -51,9 +53,14 @@ async function main() {
     }
 
     for (const data of jsonData) {
-      await model.create({
-        data,
-      });
+      try {
+        await model.create({
+          data,
+        });
+        console.log(`Inserted data into ${modelName}:`, data);
+      } catch (error) {
+        console.error(`Error inserting data into ${modelName}:`, data, error);
+      }
     }
 
     console.log(`Seeded ${modelName} with data from ${fileName}`);
@@ -67,3 +74,37 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === "POST") {
+    const { x, y, locked, qrData, productos } = req.body;
+
+    try {
+      const rack = await prisma.rack.create({
+        data: {
+          x,
+          y,
+          locked,
+          qrData,
+          productos: {
+            create: productos.map((producto: any) => ({
+              productoId: producto.productoId,
+              nombre: producto.nombre,
+              precio: producto.precio,
+              cantidadExistente: producto.cantidadExistente,
+              categoria: producto.categoria,
+            })),
+          },
+        },
+      });
+
+      res.status(201).json(rack);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error al crear el rack" });
+    }
+  } else {
+    res.setHeader("Allow", ["POST"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+}
