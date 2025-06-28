@@ -68,9 +68,9 @@ app.use("/api/rackRoutes", rackRoutes);
 // =======================
 
 // Obtenemos el puerto del archivo .env o usamos el 3002 por defecto
-const port = process.env.PORT || 3002;
+const port = Number(process.env.PORT) || 3002;
 
 // Iniciamos el servidor y escuchamos en el puerto especificado
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
     console.log(`Server running on port ${port}`);
 });
