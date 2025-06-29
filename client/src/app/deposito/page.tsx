@@ -287,12 +287,8 @@ function Deposito() {
     const rack = racks.find((r) => r.id === currentRackId);
     if (!rack) return null;
 
-    // Estado local para el piso seleccionado
-    const [selectedFloor, setSelectedFloor] = useState(
-      rack.floors && rack.floors.length > 0 ? rack.floors[0].id : null
-    );
-
-    // Encuentra el piso seleccionado
+    // Usa el estado global para el piso seleccionado
+    const selectedFloor = selectedFloors[rack.id] ?? rack.floors[0]?.id ?? null;
     const floor = rack.floors?.find((f) => f.id === selectedFloor);
 
     return (
@@ -308,7 +304,9 @@ function Deposito() {
             <Select
               value={selectedFloor}
               label="Piso"
-              onChange={(e) => setSelectedFloor(Number(e.target.value))}
+              onChange={(e) =>
+                handleSelectFloor(rack.id, Number(e.target.value))
+              }
             >
               {rack.floors.map((f) => (
                 <MenuItem key={f.id} value={f.id}>
@@ -351,7 +349,7 @@ function Deposito() {
         )}
       </Box>
     );
-  }, [currentRackId, racks]);
+  }, [currentRackId, racks, selectedFloors, handleSelectFloor]);
 
   // Guardar cambios de construcción
   const saveConstructionChanges = useCallback(async () => {
