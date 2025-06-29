@@ -33,7 +33,19 @@ const columns: GridColDef[] = [
 ];
 
 const Inventario = () => {
-  const { data: productos, isError, isLoading } = useGetProductosQuery();
+  const {
+    data: productos,
+    isError,
+    isLoading,
+  } = useGetProductosQuery({
+    searchTerm: "",
+    page: 1,
+    limit: 100,
+    categoria: "",
+    proveedor: "",
+    precioMin: 0,
+    precioMax: 999999,
+  });
   console.log("productos :", productos);
 
   if (isLoading) {
