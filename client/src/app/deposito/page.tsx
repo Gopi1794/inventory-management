@@ -133,12 +133,17 @@ function Deposito() {
   const [productoDetalle, setProductoDetalle] = useState<ProductoData | null>(
     null
   );
+  // Al inicio del componente Deposito
+  const [selectedFloors, setSelectedFloors] = useState<{
+    [rackId: number]: number | null;
+  }>({});
   const [isNewRackModalOpen, setIsNewRackModalOpen] = useState(false);
   const [newRackFloorsCount, setNewRackFloorsCount] = useState(1);
   const [newRackFloors, setNewRackFloors] = useState<FloorInput[]>([
     { id: 1, name: "Piso 1", level: 1 },
   ]);
   // Estados para zoom y pan
+
   const [scale, setScale] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -270,7 +275,15 @@ function Deposito() {
     [deleteRackMutation]
   );
 
-  // Toggle drawer de un rack
+  // Al inicio del componente Deposito (ya lo tienes, solo asegúrate de tenerlo)
+  const [selectedFloors, setSelectedFloors] = useState<{
+    [rackId: number]: number | null;
+  }>({});
+
+  // Handler para cambiar el piso seleccionado de un rack
+  const handleSelectFloor = (rackId: number, floorId: number) => {
+    setSelectedFloors((prev) => ({ ...prev, [rackId]: floorId }));
+  };
 
   // Renderizar contenido del drawer
   const renderDrawerContent = useCallback(() => {
@@ -279,12 +292,8 @@ function Deposito() {
     const rack = racks.find((r) => r.id === currentRackId);
     if (!rack) return null;
 
-    // Estado local para el piso seleccionado
-    const [selectedFloor, setSelectedFloor] = useState(
-      rack.floors && rack.floors.length > 0 ? rack.floors[0].id : null
-    );
-
-    // Encuentra el piso seleccionado
+    // Usa el estado global para el piso seleccionado
+    const selectedFloor = selectedFloors[rack.id] ?? rack.floors[0]?.id ?? null;
     const floor = rack.floors?.find((f) => f.id === selectedFloor);
 
     return (
@@ -300,7 +309,9 @@ function Deposito() {
             <Select
               value={selectedFloor}
               label="Piso"
-              onChange={(e) => setSelectedFloor(Number(e.target.value))}
+              onChange={(e) =>
+                handleSelectFloor(rack.id, Number(e.target.value))
+              }
             >
               {rack.floors.map((f) => (
                 <MenuItem key={f.id} value={f.id}>
@@ -343,7 +354,7 @@ function Deposito() {
         )}
       </Box>
     );
-  }, [currentRackId, racks]);
+  }, [currentRackId, racks, selectedFloors]);
 
   // Guardar cambios de construcción
   const saveConstructionChanges = useCallback(async () => {
