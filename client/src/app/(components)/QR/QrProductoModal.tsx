@@ -58,9 +58,9 @@ const QRModal = ({
   useEffect(() => {
     if (productoCongelado) {
       const qrUrl = generateQRCodeUrl();
-      onQRGenerated(qrUrl); // Pasamos la URL generada al componente padre
+      onQRGenerated(qrUrl);
     }
-  }, [productoCongelado, onQRGenerated]);
+  }, [productoCongelado, onQRGenerated, generateQRCodeUrl]);
 
   const handlePrint = useReactToPrint({
     content: () => qrRef.current,

@@ -40,13 +40,13 @@ const Navbar = () => {
     dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
     setShowDropdown(value.length > 2);
   };
 
-  const handleSelect = (productoId) => {
+  const handleSelect = (productoId: string) => {
     setShowDropdown(false);
     setSearchTerm("");
     router.push(`/productos/${productoId}`);
