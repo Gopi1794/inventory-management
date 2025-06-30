@@ -241,9 +241,10 @@ const CrearProductoModal = ({
   };
   // En CrearProductoModal.tsx
   const handleQRGenerated = (qrUrl: string) => {
-    updateProducto({ productoId: productoCreado.productoId, qr_url: qrUrl });
+    if (productoCreado) {
+      updateProducto({ productoId: productoCreado.productoId, qr_url: qrUrl });
+    }
   };
-
   if (!isOpen) return null;
 
   return (
