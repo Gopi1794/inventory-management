@@ -155,6 +155,7 @@ const Productos = () => {
         productoId: productoData.productoId,
         nombre: productoData.nombre,
         precio: productoData.precio,
+        cantidadExistente: productoData.cantidadExistente,
         categoria: productoData.categoria || 1, // valor por defecto
         descripcion: productoData.descripcion || "Descripción no disponible",
         proveedor: productoData.proveedor || "Proveedor no especificado",
