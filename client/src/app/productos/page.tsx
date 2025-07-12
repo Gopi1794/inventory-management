@@ -47,6 +47,18 @@ type ProductoFormData = {
   fechaDeModificacion: Date;
 };
 
+// Tipo para crear un nuevo producto (compatible con CrearProductoModal)
+type NuevoProductoInput = {
+  productoId: string;
+  nombre: string;
+  precio: number;
+  categoria?: number;
+  descripcion?: string;
+  proveedor?: string;
+  cantidadExistente: number;
+  ubicaciones: { rackId: number; floorId: number }[];
+};
+
 interface Ubicacion {
   id: number;
   floorId: number;
@@ -127,7 +139,7 @@ const Productos = () => {
   });
 
   // Función para crear un producto nuevo y mostrar feedback con SweetAlert
-  const handleCreateProduct = async (productoData: NuevoProducto) => {
+  const handleCreateProduct = async (productoData: NuevoProductoInput) => {
     try {
       // Validación básica
       if (
@@ -138,16 +150,16 @@ const Productos = () => {
         throw new Error("Faltan campos requeridos");
       }
 
-      // Establecer fechas
-      const now = new Date();
-      const productoCompleto = {
-        ...productoData,
-        fechaDeCreacion: now,
-        fechaDeModificacion: now,
-        fechaDeEliminacion: null,
-        qr_url: "", // o el valor que corresponda
+      // Convertir NuevoProductoInput a NuevoProducto
+      const productoCompleto: NuevoProducto = {
+        productoId: productoData.productoId,
+        nombre: productoData.nombre,
+        precio: productoData.precio,
+        categoria: productoData.categoria || 1, // valor por defecto
         descripcion: productoData.descripcion || "Descripción no disponible",
         proveedor: productoData.proveedor || "Proveedor no especificado",
+        qr_url: "", // se generará después
+        ubicaciones: productoData.ubicaciones.map(u => ({ floorId: u.floorId })),
       };
 
       const response = await createProducto(productoCompleto).unwrap();
@@ -160,7 +172,7 @@ const Productos = () => {
         showConfirmButton: false,
       });
 
-      return response;
+      return { productoId: response.productoId };
     } catch (error) {
       console.error("Error al crear producto:", error);
       Swal.fire({

@@ -763,7 +763,7 @@ function Deposito() {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [racks.length, applyInteract]); // Incluir applyInteract en las dependencias
+  }, [racks, applyInteract]); // Incluir racks y applyInteract en las dependencias
 
   // Prevenir zoom del navegador
   useEffect(() => {
