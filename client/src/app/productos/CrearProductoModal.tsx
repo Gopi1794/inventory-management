@@ -5,20 +5,16 @@ import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 import { QRCodeSVG } from "qrcode.react";
 
-type ProductoUbicacionInput = {
-  rackId?: number;
-  floorId?: number;
-};
-
+// Importar el tipo desde el archivo de productos
 type NuevoProductoInput = {
-  productoId: string; // <-- AGREGA ESTA LÍNEA
+  productoId: string;
   nombre: string;
   precio: number;
   categoria?: number;
   descripcion?: string;
   proveedor?: string;
-  cantidadExistente: number; // <--- nuevo campo
-  ubicaciones: ProductoUbicacionInput[];
+  cantidadExistente: number;
+  ubicaciones: { rackId: number; floorId: number }[];
 };
 
 type CrearProductoModalProps = {
@@ -59,7 +55,7 @@ const CrearProductoModal = ({
   });
 
   const [ubicacionActual, setUbicacionActual] =
-    useState<ProductoUbicacionInput>({});
+    useState<{ rackId?: number; floorId?: number }>({});
   const [updateProducto] = useUpdateProductoMutation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [productoCreado, setProductoCreado] = useState<Producto | null>(null);
@@ -100,10 +96,8 @@ const CrearProductoModal = ({
       formData.ubicaciones.length > 0 &&
       formData.ubicaciones.every(
         (u) =>
-          u.rackId !== undefined &&
-          u.rackId !== null &&
-          u.floorId !== undefined &&
-          u.floorId !== null
+          typeof u.rackId === 'number' &&
+          typeof u.floorId === 'number'
       )
     );
   };
