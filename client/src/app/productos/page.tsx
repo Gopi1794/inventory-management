@@ -618,7 +618,7 @@ const Productos = () => {
 
       {/* Modal para crear un nuevo producto */}
       <CrearProductoModal
-        open={isModalOpen}
+        isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onCreate={handleCreateProduct}
       />
