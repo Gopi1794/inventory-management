@@ -709,7 +709,7 @@ const Productos = () => {
                     <span className="font-medium text-gray-900">
                       {productoDetalle.ubicaciones &&
                       productoDetalle.ubicaciones.length > 0
-                        ? `Rack ${productoDetalle.ubicaciones[0].floor.rackId}, Nivel ${productoDetalle.ubicaciones[0].floor.level}`
+                        ? `Piso ${productoDetalle.ubicaciones[0].floorId}`
                         : "No especificada"}
                     </span>
                   </div>
