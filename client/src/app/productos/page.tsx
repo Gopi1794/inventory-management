@@ -7,6 +7,7 @@ import {
   useGetProductosQuery,
 } from "@/state/api";
 import { useState } from "react";
+import Image from "next/image";
 import Skeleton from "@mui/material/Skeleton";
 import {
   Search,
@@ -49,7 +50,7 @@ type ProductoFormData = {
 interface Ubicacion {
   id: number;
   floorId: number;
-  producto: ProductoData; // Cambia de productos: ProductoData[] a producto: ProductoData
+  producto: ProductoFormData;
   cantidad: number;
 }
 
@@ -76,12 +77,26 @@ const Productos = () => {
   // Función para abrir el drawer de detalles de un producto
   // Mejorar el manejo de valores por defecto
   const abrirDetalles = (producto: ProductoFormData) => {
-    setSelectedProducto({
-      ...producto,
-      qr_url: producto.qr_url || "", // Mejor manejar en UI la ausencia
-    });
+    const productoForm: ProductoFormData = {
+      productoId: producto.productoId,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      cantidadExistente: producto.cantidadExistente,
+      categoria: producto.categoria,
+      descripcion: producto.descripcion || "Descripción no disponible",
+      proveedor: producto.proveedor || "Proveedor no especificado",
+      qr_url: producto.qr_url || "",
+      ubicaciones: producto.ubicaciones || [],
+      fechaDeCreacion: producto.fechaDeCreacion
+        ? new Date(producto.fechaDeCreacion)
+        : new Date(),
+      fechaDeModificacion: producto.fechaDeModificacion
+        ? new Date(producto.fechaDeModificacion)
+        : new Date(),
+    };
+    setSelectedProducto(productoForm);
     setIsQRModalOpen(true);
-    setProductoDetalle(producto);
+    setProductoDetalle(productoForm);
   };
 
   // Agregar paginación o carga infinita
@@ -130,7 +145,7 @@ const Productos = () => {
         fechaDeCreacion: now,
         fechaDeModificacion: now,
         fechaDeEliminacion: null,
-        qr_url: productoData.qr_url || null,
+        qr_url: "", // o el valor que corresponda
         descripcion: productoData.descripcion || "Descripción no disponible",
         proveedor: productoData.proveedor || "Proveedor no especificado",
       };
@@ -151,7 +166,8 @@ const Productos = () => {
       Swal.fire({
         title: "Error",
         text:
-          error.message || "No se pudo crear el producto. Verifica los datos.",
+          (error instanceof Error && error.message) ||
+          "No se pudo crear el producto. Verifica los datos.",
         icon: "error",
       });
       throw error;
@@ -471,7 +487,27 @@ const Productos = () => {
                 {/* Botón para ver detalles del producto */}
                 <div className="mt-5 flex space-x-3">
                   <button
-                    onClick={() => abrirDetalles(producto)}
+                    onClick={() =>
+                      abrirDetalles({
+                        productoId: producto.productoId,
+                        nombre: producto.nombre,
+                        precio: producto.precio,
+                        cantidadExistente: producto.cantidadExistente,
+                        categoria: producto.categoria,
+                        descripcion:
+                          producto.descripcion || "Descripción no disponible",
+                        proveedor:
+                          producto.proveedor || "Proveedor no especificado",
+                        qr_url: producto.qr_url || "",
+                        ubicaciones: producto.ubicaciones || [],
+                        fechaDeCreacion: producto.fechaDeCreacion
+                          ? new Date(producto.fechaDeCreacion)
+                          : new Date(),
+                        fechaDeModificacion: producto.fechaDeModificacion
+                          ? new Date(producto.fechaDeModificacion)
+                          : new Date(),
+                      })
+                    }
                     className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
                     <Info className="h-4 w-4 mr-2" />
@@ -514,7 +550,27 @@ const Productos = () => {
               </div>
               {/* Botón de acción */}
               <button
-                onClick={() => abrirDetalles(producto)}
+                onClick={() =>
+                  abrirDetalles({
+                    productoId: producto.productoId,
+                    nombre: producto.nombre,
+                    precio: producto.precio,
+                    cantidadExistente: producto.cantidadExistente,
+                    categoria: producto.categoria,
+                    descripcion:
+                      producto.descripcion || "Descripción no disponible",
+                    proveedor:
+                      producto.proveedor || "Proveedor no especificado",
+                    qr_url: producto.qr_url || "",
+                    ubicaciones: producto.ubicaciones || [],
+                    fechaDeCreacion: producto.fechaDeCreacion
+                      ? new Date(producto.fechaDeCreacion)
+                      : new Date(),
+                    fechaDeModificacion: producto.fechaDeModificacion
+                      ? new Date(producto.fechaDeModificacion)
+                      : new Date(),
+                  })
+                }
                 className="ml-4 text-blue-600 hover:underline text-sm whitespace-nowrap"
               >
                 Ver detalles
@@ -549,7 +605,7 @@ const Productos = () => {
 
       {/* Modal para crear un nuevo producto */}
       <CrearProductoModal
-        isOpen={isModalOpen}
+        open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onCreate={handleCreateProduct}
       />
@@ -592,10 +648,12 @@ const Productos = () => {
                 </h3>
                 <div className="flex flex-col items-center">
                   {productoDetalle.qr_url ? (
-                    <img
+                    <Image
                       src={productoDetalle.qr_url}
                       alt="Código QR del producto"
-                      className="w-48 h-48 border border-gray-200 p-2 rounded-md"
+                      width={192}
+                      height={192}
+                      className="border border-gray-200 p-2 rounded-md"
                     />
                   ) : (
                     <div className="w-48 h-48 bg-gray-100 flex items-center justify-center rounded-md border border-gray-200">

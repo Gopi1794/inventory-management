@@ -12,6 +12,8 @@ export interface Productos {
   proveedor: string;
   qr_url?: string | null;
   ubicaciones?: ProductoUbicacion[];
+  fechaDeCreacion?: string | Date;
+  fechaDeModificacion?: string | Date;
 }
 
 export interface ProductoUbicacion {
@@ -53,8 +55,6 @@ export interface NuevoProducto {
   qr_url: string;
   ubicaciones: { floorId: number }[]; // solo floorId
 }
-
-
 
 // Interfaz para el resumen de ventas
 export interface ResumenDeVentas {

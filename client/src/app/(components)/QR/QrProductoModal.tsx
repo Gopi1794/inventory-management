@@ -38,29 +38,23 @@ const QRModal = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, producto]);
-  // Función para generar la URL del QR
-  const generateQRCodeUrl = () => {
-    if (!productoCongelado) return "";
-
-    const qrData = {
-      id: productoCongelado.productoId,
-      nombre: productoCongelado.nombre,
-      precio: productoCongelado.precio,
-      rack: productoCongelado.rack_id,
-    };
-
-    return `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
-      JSON.stringify(qrData)
-    )}&size=200x200`;
-  };
-
   // Llamar a onQRGenerated cuando tengamos los datos
   useEffect(() => {
     if (productoCongelado) {
-      const qrUrl = generateQRCodeUrl();
+      const qrData = {
+        id: productoCongelado.productoId,
+        nombre: productoCongelado.nombre,
+        precio: productoCongelado.precio,
+        rack: productoCongelado.rack_id,
+      };
+
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
+        JSON.stringify(qrData)
+      )}&size=200x200`;
+      
       onQRGenerated(qrUrl);
     }
-  }, [productoCongelado, onQRGenerated, generateQRCodeUrl]);
+  }, [productoCongelado, onQRGenerated]);
 
   const handlePrint = useReactToPrint({
     content: () => qrRef.current,

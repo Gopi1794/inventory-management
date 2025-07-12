@@ -247,9 +247,9 @@ function Deposito() {
   }, []);
 
   // Handler para cambiar el piso seleccionado de un rack
-  const handleSelectFloor = (rackId: number, floorId: number) => {
+  const handleSelectFloor = useCallback((rackId: number, floorId: number) => {
     setSelectedFloors((prev) => ({ ...prev, [rackId]: floorId }));
-  };
+  }, []);
 
   // -------------------- FUNCIONES AUXILIARES --------------------
   // Filtrar racks (por ahora retorna todos los racks)
@@ -763,7 +763,7 @@ function Deposito() {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [racks.length]); // Solo dependencia del número de racks
+  }, [racks.length, applyInteract]); // Incluir applyInteract en las dependencias
 
   // Prevenir zoom del navegador
   useEffect(() => {

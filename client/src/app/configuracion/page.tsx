@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Header from "../(components)/Header/header";
 import { setIsDarkMode } from "@/state";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
@@ -104,11 +105,11 @@ const Configuracion = () => {
                     </label>
                   ) : setting.key === "language" ? (
                     <div className="flex items-center space-x-2">
-                      <img
+                      <Image
                         src={flagSrc}
                         alt="Flag"
-                        width="20"
-                        height="15"
+                        width={20}
+                        height={15}
                         className="rounded-sm"
                       />
                       <select
