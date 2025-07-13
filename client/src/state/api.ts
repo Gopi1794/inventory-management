@@ -118,7 +118,7 @@ export const api = createApi({
   endpoints: (build) => ({  // Definimos los endpoints disponibles en esta API
     // Endpoint para obtener las métricas del dashboard
     getDashboardMetrics: build.query<DashboardMetrics, void>({
-      query: () => "/dashboard",  // URL para obtener las métricas del dashboard
+      query: () => "api/dashboard",  // URL para obtener las métricas del dashboard
       providesTags: ["dashboardMetrics"], // Etiqueta que se asocia a este endpoint
     }),
     // Endpoint para obtener los productos (opcionalmente puede recibir un parámetro de búsqueda)
@@ -132,7 +132,7 @@ export const api = createApi({
       precioMax: number
     }>({
       query: ({ searchTerm, page, limit, categoria, proveedor, precioMin, precioMax }) =>
-        `/productos?search=${searchTerm}&page=${page}&limit=${limit}` +
+        `api/productos?search=${searchTerm}&page=${page}&limit=${limit}` +
         (categoria ? `&categoria=${categoria}` : "") +
         (proveedor ? `&proveedor=${proveedor}` : "") +
         (precioMin ? `&precioMin=${precioMin}` : "") +
@@ -165,7 +165,7 @@ export const api = createApi({
     }),
     loginUsuario: build.mutation({
       query: ({ nombre_usuario, contrasena }) => ({
-        url: '/authRoutes/login', // URL para el login
+        url: 'api/authRoutes/login', // URL para el login
         method: 'POST',
         body: { nombre_usuario, contrasena },
       }),
