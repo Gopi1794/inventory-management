@@ -139,13 +139,13 @@ export const api = createApi({
         (precioMax ? `&precioMax=${precioMax}` : ""),
     }),
     getRacks: build.query<Rack[], void>({
-      query: () => "/rackRoutes", // ✅ Así coincide con tu backend
+      query: () => "/api/rackRoutes", // ✅ Así coincide con tu backend
       providesTags: ["Racks"],
     }),
     // Endpoint para crear un nuevo producto
     createProducto: build.mutation<Productos, NuevoProducto>({
       query: (nuevoProducto) => ({
-        url: "/productos", // URL para crear un producto
+        url: "/api/productos", // URL para crear un producto
         method: "POST", // Método HTTP POST
         body: nuevoProducto // El cuerpo de la solicitud es el nuevo producto
       }),
@@ -156,11 +156,11 @@ export const api = createApi({
   
     // Endpoint para obtener los usuarios
     getUsuarios: build.query<Usuarios[], void>({
-      query: () => "/usuarios",  // URL para obtener los usuarios
+      query: () => "/api/usuarios",  // URL para obtener los usuarios
       providesTags: ["Usuarios"],  // Etiqueta que se asocia a este endpoint
     }),
     getGastosPorCategoria: build.query<GastosPorCategoriaResumen[], void>({
-      query: () => "/gastos",
+      query: () => "/api/gastos",
       providesTags: ["Gastos"],  // Etiqueta que se asocia a este endpoint
     }),
     loginUsuario: build.mutation({
@@ -174,7 +174,7 @@ export const api = createApi({
     // Agrega este endpoint dentro de `endpoints` en tu configuración de la API
     createRack: build.mutation<Rack, Partial<Rack>>({
       query: (nuevoRack) => ({
-        url: "/rackRoutes",
+        url: "/api/rackRoutes",
         method: "POST",
         body: nuevoRack,
       }),
@@ -184,7 +184,7 @@ export const api = createApi({
     // Agregar el endpoint para eliminar racks
     deleteRack: build.mutation<Rack, number>({
       query: (id) => ({
-        url: `/rackRoutes/${id}`,
+        url: `/api/rackRoutes/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Racks"],
@@ -192,7 +192,7 @@ export const api = createApi({
 
     updateRack: build.mutation<Rack, Partial<Rack> & { id: number }>({
       query: ({ id, ...patch }) => ({
-        url: `/rackRoutes/${id}`,
+        url: `/api/rackRoutes/${id}`,
         method: "PATCH", // o "PUT" según tu backend
         body: patch,
       }),
@@ -200,7 +200,7 @@ export const api = createApi({
     }),
     updateProducto: build.mutation<Productos, { productoId: string; qr_url: string }>({
       query: ({ productoId, qr_url }) => ({
-        url: `/productos/${productoId}`,
+        url: `/api/productos/${productoId}`,
         method: "PATCH",
         body: { qr_url },
       }),
