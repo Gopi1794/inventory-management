@@ -7,6 +7,7 @@ import { setIsDarkMode, setIsSidebarCollapsed } from "@/state";
 import { useGetProductosQuery } from "@/state/api";
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -123,7 +124,12 @@ const Navbar = () => {
           <hr className="w-0 h-7 border border-solid border-1 border-gray-300 mx-3" />
 
           <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-9 h-9">image</div>
+             <Image src="https://s3-gestordeinventario.s3.us-east-2.amazonaws.com/perfile.jpg"
+             alt="Perfile"
+             width={40}
+             height={40}
+             className="rounded-full h-full object-cover"
+             />
             <span className="font-semibold">GG Dev</span>
           </div>
         </div>

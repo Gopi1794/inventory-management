@@ -71,18 +71,15 @@ export function SitemarkIcon() {
       <circle cx="50" cy="80" r="2" fill="#4876EE" />
 
       <text
-        x="120"
-        y="67"
-        font-family="Arial, sans-serif"
-        font-size="18"
-        fill="#2D3748"
-        font-weight="bold"
-      >
-        <tspan fill="#4876EE">Inventory</tspan>
-        <tspan fill="#ccc9" dx="10">
-          Scan
-        </tspan>
-      </text>
+  x="120"
+  y="57"
+  fontFamily="Arial, sans-serif"
+  fill="#2D3748"
+  fontWeight="bold"
+>
+  <tspan x="120" fill="#4876EE" fontSize="14">Gestor de</tspan>
+  <tspan x="120" dy="18" fill="#00D3AB" fontSize="22" >Inventario</tspan>
+</text>
 
       <defs width="50%">
         <linearGradient id="cube-gradient" x1="0%" y1="0%" x2="100%" y2="100%">

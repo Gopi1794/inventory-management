@@ -16,6 +16,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import "../../../i18n"; // Asegura que se inicializa
+import Image from "next/image";
 
 interface SidebarLinkProps {
   href: string;
@@ -81,7 +82,12 @@ const Sidebar = () => {
           isSidebarCollapsed ? "px-5" : "px-8"
         }`}
       >
-        <div>Logo</div>
+        <Image src="https://s3-gestordeinventario.s3.us-east-2.amazonaws.com/logo.png"
+             alt="Logo"
+             width={50}
+             height={50}
+             className="rounded-full h-full object-cover"
+             />
         <h1
           className={`font-extrabold text-2xl ${
             isSidebarCollapsed ? "hidden" : "block"
