@@ -44,7 +44,6 @@ function main() {
             "Compras",
             "ProductoUbicacion",
             "Productos",
-            "Bin",
             "Rack",
             "Floor",
             "Usuarios",
@@ -90,7 +89,8 @@ function main() {
             { model: "ResumenDeVentas", file: "resumenDeVentas.json" },
             { model: "ResumenDeCompras", file: "resumenDeCompras.json" },
             { model: "ResumenDeGastos", file: "resumenDeGastos.json" },
-            { model: "GastosPorCategoria", file: "gastosPorCategoria.json" }
+            { model: "GastosPorCategoria", file: "gastosPorCategoria.json" },
+            { model: "Roles", file: "roles.json" }
         ];
         for (const { model, file } of otros) {
             const filePath = path_1.default.join(dataDir, file);
