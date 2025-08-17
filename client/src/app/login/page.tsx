@@ -10,6 +10,8 @@ import Swal from "sweetalert2";
 import { GuardSpinner } from "react-spinners-kit";
 import ForgotPassword from "../(components)/Login/ForgotPassword";
 import { SitemarkIcon } from "../(components)/Login/CostumIcon";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -302,6 +304,42 @@ export default function SignIn() {
               )}
             </button>
           </form>
+
+          {/* Botón de inicio de sesión con Google */}
+          <div className="mt-4">
+            <button
+              onClick={() => signIn("google")}
+              className={`w-full py-3 px-4 rounded-lg font-medium transition-colors duration-300 ${
+                isDarkMode
+                  ? "bg-white hover:bg-gray-100 text-gray-900"
+                  : "bg-gray-800 hover:bg-gray-700 text-white"
+              } flex items-center justify-center`}
+            >
+              <svg
+                className="w-5 h-5 mr-3"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                fill="currentColor"
+              >
+                <path d="M23.994 24.586c0-.586-.057-1.148-.164-1.693H12v3.379h6.897c-.3 1.564-1.706 2.707-3.897 2.707-2.243 0-4.043-1.8-4.043-4.043 0-2.243 1.8-4.043 4.043-4.043 1.191 0 2.597.543 3.897 2.707l2.793-2.793C26.24 17.24 24.004 15 21.004 15c-4.418 0-8 3.582-8 8s3.582 8 8 8c2.243 0 4.043-1.8 4.043-4.043z" />
+              </svg>
+              Iniciar sesión con Google
+            </button>
+          </div>
+
+          {/* Enlace a registro */}
+          <div className="mt-4 text-center">
+            <Link
+              href="/register"
+              className={`text-sm font-medium ${
+                isDarkMode
+                  ? "text-blue-400 hover:text-blue-300"
+                  : "text-blue-600 hover:text-blue-500"
+              }`}
+            >
+              ¿No tienes una cuenta? Regístrate
+            </Link>
+          </div>
         </div>
       </div>
 
