@@ -39,8 +39,6 @@ import {
   DialogContent,
   DialogActions,
   ButtonGroup,
-  Divider,
-  IconButton,
 } from "@mui/material";
 import { useReactToPrint } from "react-to-print";
 import { QRCodeSVG } from "qrcode.react";
