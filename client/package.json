@@ -26,6 +26,7 @@
     "konva": "^9.3.20",
     "lucide-react": "^0.407.0",
     "next": "14.2.4",
+    "next-auth": "^4.24.11",
     "numeral": "^2.0.6",
     "qrcode.react": "^4.2.0",
     "react": "^18",
