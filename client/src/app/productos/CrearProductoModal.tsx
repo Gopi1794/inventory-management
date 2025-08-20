@@ -54,8 +54,10 @@ const CrearProductoModal = ({
     ubicaciones: [],
   });
 
-  const [ubicacionActual, setUbicacionActual] =
-    useState<{ rackId?: number; floorId?: number }>({});
+  const [ubicacionActual, setUbicacionActual] = useState<{
+    rackId?: number;
+    floorId?: number;
+  }>({});
   const [updateProducto] = useUpdateProductoMutation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [productoCreado, setProductoCreado] = useState<Producto | null>(null);
@@ -95,9 +97,7 @@ const CrearProductoModal = ({
       formData.cantidadExistente > 0 &&
       formData.ubicaciones.length > 0 &&
       formData.ubicaciones.every(
-        (u) =>
-          typeof u.rackId === 'number' &&
-          typeof u.floorId === 'number'
+        (u) => typeof u.rackId === "number" && typeof u.floorId === "number"
       )
     );
   };
