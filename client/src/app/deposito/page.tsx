@@ -52,7 +52,7 @@ import {
   ProductoUbicacion,
 } from "@/state/api";
 import RackDrawerContent from "../(components)/RackDrawerContent";
-
+import CloseIcon from "@mui/icons-material/Close";
 // Interfaces para los tipos de datos usados en el componente
 interface RackData extends ApiRack {
   width: number;
@@ -1456,7 +1456,7 @@ function Deposito() {
           <div
             style={{
               position: "absolute",
-              top: "20px",
+              bottom: "20px",
               left: "20px",
               zIndex: 10,
               background: "rgba(76, 175, 79, 0.54)",
@@ -1519,6 +1519,17 @@ function Deposito() {
           },
         }}
       >
+        {/* Botón de cierre */}
+        <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
+          <Button
+            onClick={() => setCurrentRackId(null)}
+            color="inherit"
+            size="small"
+            startIcon={<CloseIcon />}
+          >
+            Cerrar
+          </Button>
+        </Box>
         {currentRackId && racks.find((r) => r.id === currentRackId) && (
           <RackDrawerContent
             rack={racks.find((r) => r.id === currentRackId)!}
